@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAMAYAN: THE EPIC QUEST - Coming Soon</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="fireworks-container" id="fireworks"></div>
+  
+  <div class="audio-controls">
+    <audio id="theme-song" loop>
+      <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/theme-song--by-shumaar-studios-14MkUN1aGk2EY0wcpzzb89VnRcrYI0.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <button id="audio-toggle" class="audio-btn">
+      <span class="audio-icon">🔊</span>
+    </button>
+  </div>
+  
+  <div class="container">
+    <div class="game-info">
+      <h1 class="title">RAMAYAN</h1>
+      <h2 class="subtitle">THE EPIC QUEST</h2>
+      <h3 class="chapter">CHAPTER 1</h3>
+    </div>
+    
+    <div class="countdown-container">
+      <div class="countdown-title">RELEASING IN</div>
+      <div class="countdown-timer" id="countdown">
+        <div class="time-segment">
+          <div class="time-value" id="days">00</div>
+          <div class="time-label">Days</div>
+        </div>
+        <div class="time-segment">
+          <div class="time-value" id="hours">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+        <div class="time-segment">
+          <div class="time-value" id="minutes">00</div>
+          <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-segment">
+          <div class="time-value" id="seconds">00</div>
+          <div class="time-label">Seconds</div>
+        </div>
+      </div>
+      
+      <div class="launch-message" id="launch-message">
+        <h2>THE EPIC QUEST BEGINS NOW!</h2>
+        <p>RAMAYAN: THE EPIC QUEST is now available!</p>
+      </div>
+      
+      <button class="notify-btn" id="notify-btn">NOTIFY ME</button>
+    </div>
+    
+    <div class="release-info">
+      <p>COMING ON THIS DUSSEHRA</p>
+      <p class="date">02 OCTOBER 2025</p>
+      <p class="creators">AARUSH KHERUDKAR | SHUBHAM KHERUDKAR</p>
+      <div class="studio-logo">SHUMAAR STUDIOS</div>
+    </div>
+    
+    <div class="social-media">
+      <a href="https://www.instagram.com/shumaarstudio/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+        <i data-lucide="instagram"></i>
+      </a>
+      <a href="https://www.youtube.com/@ShumaarStudios" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+        <i data-lucide="youtube"></i>
+      </a>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
+
