@@ -30,35 +30,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Update countdown every second
   const countdown = setInterval(() => {
+    // Get current date and time
     const now = new Date().getTime()
+
+    // Calculate the time remaining
     const timeRemaining = releaseDate - now
 
+    // Calculate days, hours, minutes, and seconds
     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24))
     const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))
     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000)
 
+    // Update the countdown display
     daysElement.textContent = String(days).padStart(2, "0")
     hoursElement.textContent = String(hours).padStart(2, "0")
     minutesElement.textContent = String(minutes).padStart(2, "0")
     secondsElement.textContent = String(seconds).padStart(2, "0")
 
-    secondsElement.classList.add("pulse")
-    setTimeout(() => secondsElement.classList.remove("pulse"), 900)
-
+    // If countdown is over
     if (timeRemaining < 0) {
       clearInterval(countdown)
-      daysElement.textContent = "00"
-      hoursElement.textContent = "00"
-      minutesElement.textContent = "00"
-      secondsElement.textContent = "00"
-
       countdownElement.style.display = "none"
       launchMessageElement.style.display = "block"
       notifyButton.textContent = "PLAY NOW"
 
-      startFireworks()
+      // Trigger 50 fireworks per second for 10 seconds
+      let fireworkInterval = setInterval(() => {
+        for (let i = 0; i < 50; i++) {
+          createFirework()
+        }
+      }, 1000)
 
+      setTimeout(() => clearInterval(fireworkInterval), 10000)
+
+      // Play theme song automatically
       if (!isPlaying) {
         themeAudio.play()
         isPlaying = true
@@ -67,56 +73,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 1000)
 
-  notifyButton.addEventListener("click", () => {
-    alert("Thank you! You will be notified when RAMAYAN: THE EPIC QUEST launches.")
-  })
-
-  function startFireworks() {
-    let fireworkInterval = setInterval(() => {
-      for (let i = 0; i < 50; i++) {
-        createFirework()
-      }
-    }, 1000) // 50 fireworks per second
-
-    setTimeout(() => {
-      clearInterval(fireworkInterval)
-    }, 10000) // Stop after 10 seconds
-  }
-
+  // Firework creation function
   function createFirework() {
     const firework = document.createElement("div")
     firework.className = "firework"
 
+    // Random position
     const posX = Math.random() * window.innerWidth
     const posY = Math.random() * window.innerHeight * 0.7
 
     firework.style.left = `${posX}px`
     firework.style.top = `${posY}px`
 
+    // Random color
     const hue = Math.floor(Math.random() * 360)
     firework.style.backgroundColor = `hsl(${hue}, 100%, 50%)`
     firework.style.boxShadow = `0 0 20px 10px hsl(${hue}, 100%, 60%)`
 
     fireworksContainer.appendChild(firework)
 
+    // Create particles
     createParticles(posX, posY, hue)
 
-    setTimeout(() => firework.remove(), 5000)
+    // Remove firework after animation
+    setTimeout(() => {
+      firework.remove()
+    }, 3000)
   }
 
   function createParticles(x, y, hue) {
-    for (let i = 0; i < 50; i++) {
+    const particleCount = 50
+
+    for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement("div")
       particle.className = "particle"
-
       particle.style.left = `${x}px`
       particle.style.top = `${y}px`
-
-      const particleHue = hue + Math.random() * 20 - 10
-      particle.style.backgroundColor = `hsl(${particleHue}, 100%, 50%)`
+      particle.style.backgroundColor = `hsl(${hue + Math.random() * 20 - 10}, 100%, 50%)`
 
       const angle = Math.random() * Math.PI * 2
-      const distance = Math.random() * 150 + 100
+      const distance = Math.random() * 150 + 50
       const translateX = Math.cos(angle) * distance
       const translateY = Math.sin(angle) * distance
 
@@ -124,8 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       particle.style.setProperty("--ty", `${translateY}px`)
 
       fireworksContainer.appendChild(particle)
-
-      setTimeout(() => particle.remove(), 5000)
+      setTimeout(() => particle.remove(), 3000)
     }
   }
 })
