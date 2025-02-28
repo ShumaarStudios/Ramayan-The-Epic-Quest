@@ -28,9 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isPlaying = !isPlaying
   })
 
-  // Create initial fireworks
-  createFireworks()
-
   // Update countdown every second
   const countdown = setInterval(() => {
     // Get current date and time
@@ -76,8 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
       launchMessageElement.style.display = "block"
       notifyButton.textContent = "PLAY NOW"
 
-      // Create celebratory fireworks
-      setInterval(createFireworks, 2000)
+      // Create celebratory fireworks for 10 seconds
+      let fireworkInterval = setInterval(() => {
+        for (let i = 0; i < 50; i++) {
+          createFireworks()
+        }
+      }, 1000)
+
+      setTimeout(() => {
+        clearInterval(fireworkInterval)
+      }, 10000)
 
       // Play theme song automatically
       if (!isPlaying) {
@@ -95,34 +100,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fireworks animation
   function createFireworks() {
-    for (let i = 0; i < 5; i++) {
-      setTimeout(() => {
-        const firework = document.createElement("div")
-        firework.className = "firework"
+    const firework = document.createElement("div")
+    firework.className = "firework"
 
-        // Random position
-        const posX = Math.random() * window.innerWidth
-        const posY = Math.random() * window.innerHeight * 0.7
+    // Random position
+    const posX = Math.random() * window.innerWidth
+    const posY = Math.random() * window.innerHeight * 0.7
 
-        firework.style.left = `${posX}px`
-        firework.style.top = `${posY}px`
+    firework.style.left = `${posX}px`
+    firework.style.top = `${posY}px`
 
-        // Random color
-        const hue = Math.floor(Math.random() * 360)
-        firework.style.backgroundColor = `hsl(${hue}, 100%, 50%)`
-        firework.style.boxShadow = `0 0 20px 10px hsl(${hue}, 100%, 60%)`
+    // Random color
+    const hue = Math.floor(Math.random() * 360)
+    firework.style.backgroundColor = `hsl(${hue}, 100%, 50%)`
+    firework.style.boxShadow = `0 0 20px 10px hsl(${hue}, 100%, 60%)`
 
-        fireworksContainer.appendChild(firework)
+    fireworksContainer.appendChild(firework)
 
-        // Create particles
-        createParticles(posX, posY, hue)
+    // Create particles
+    createParticles(posX, posY, hue)
 
-        // Remove firework after animation
-        setTimeout(() => {
-          firework.remove()
-        }, 5000)
-      }, i * 500)
-    }
+    // Remove firework after animation
+    setTimeout(() => {
+      firework.remove()
+    }, 5000)
   }
 
   function createParticles(x, y, hue) {
@@ -159,4 +160,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 })
+
 
