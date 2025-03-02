@@ -1,46 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- ... (head section remains unchanged) ... -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAMAYAN: THE EPIC QUEST</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
 <body>
-  <div class="fireworks-container" id="fireworks"></div>
-  
-  <div class="audio-controls">
-    <audio id="theme-song" loop>
-      <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/theme-song--by-shumaar-studios-14MkUN1aGk2EY0wcpzzb89VnRcrYI0.mp3" type="audio/mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <button id="audio-toggle" class="audio-btn">
-      <span class="audio-icon">🔊</span>
-    </button>
-  </div>
-  
-  <div class="container">
-    <!-- ... (previous sections remain unchanged) ... -->
-    
-    <div class="image-gallery">
-      <div class="gallery-item">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/upscalemedia-transformed-F6w8snWEXTxsqL5UNxG0RGE3ESGRFe.png" alt="Characters from Ramayan: The Epic Quest" class="gallery-image" />
-        <div class="image-caption">
-          <h3>EPIC CHARACTERS</h3>
-          <p>Experience the legendary tale with stunning visuals and detailed character designs</p>
-        </div>
-      </div>
+    <!-- Audio Controls -->
+    <div class="audio-control">
+        <button id="audio-toggle" aria-label="Toggle background music">
+            <i class="fas fa-volume-up" id="audio-icon"></i>
+        </button>
+        <audio id="background-music" loop>
+            <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/theme-song--by-shumaar-studios-sXEWcPXBCr07K3PhxrIs79mhCf7hi5.mp3" type="audio/mp3">
+        </audio>
     </div>
 
-    <div class="social-media">
-      <a href="https://www.instagram.com/shumaarstudio/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
-        <i data-lucide="instagram"></i>
-      </a>
-      <a href="https://www.youtube.com/@ShumaarStudios" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
-        <i data-lucide="youtube"></i>
-      </a>
+    <!-- Canvas for Fireworks -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">RAMAYAN: THE EPIC QUEST</h1>
+            <h2 class="subtitle">CHAPTER 1</h2>
+            
+            <!-- Countdown Timer -->
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="gallery-section">
+        <h2 class="section-title">GAME SCREENSHOTS</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-28%20173920-haY2HmrvfWydGsIqCxBHlOkIEEepe6.png">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-28%20173920-haY2HmrvfWydGsIqCxBHlOkIEEepe6.png" alt="Rama and Lakshmana" loading="lazy">
+                <div class="gallery-caption">Rama and Lakshmana</div>
+            </div>
+            <div class="gallery-item" data-src="assets/screenshot2.jpg">
+                <img src="assets/screenshot2-thumb.jpg" alt="Lord Rama with Bow" loading="lazy">
+                <div class="gallery-caption">Lord Rama with Bow</div>
+            </div>
+            <div class="gallery-item" data-src="assets/screenshot3.jpg">
+                <img src="assets/screenshot3-thumb.jpg" alt="Hanuman in Battle" loading="lazy">
+                <div class="gallery-caption">Hanuman in Battle</div>
+            </div>
+            <div class="gallery-item" data-src="assets/screenshot4.jpg">
+                <img src="assets/screenshot4-thumb.jpg" alt="Lanka Fortress" loading="lazy">
+                <div class="gallery-caption">Lanka Fortress</div>
+            </div>
+            <div class="gallery-item" data-src="assets/screenshot5.jpg">
+                <img src="assets/screenshot5-thumb.jpg" alt="Epic Battle Scene" loading="lazy">
+                <div class="gallery-caption">Epic Battle Scene</div>
+            </div>
+            <div class="gallery-item" data-src="assets/screenshot6.jpg">
+                <img src="assets/screenshot6-thumb.jpg" alt="Mystical Forest" loading="lazy">
+                <div class="gallery-caption">Mystical Forest</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox-caption"></div>
     </div>
-  </div>
-  
-  <script src="script.js"></script>
-  <script>
-    lucide.createIcons();
-  </script>
+
+    <!-- Trailer Section -->
+    <section class="trailer-section">
+        <h2 class="section-title">OFFICIAL TRAILER</h2>
+        <div class="video-container">
+            <div class="video-overlay" id="video-overlay">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div id="youtube-player"></div>
+        </div>
+        <button class="watch-full-trailer" id="watch-full-trailer">WATCH FULL TRAILER</button>
+    </section>
+
+    <!-- Game Features -->
+    <section class="features-section">
+        <h2 class="section-title">GAME FEATURES</h2>
+        <div class="features-container">
+            <div class="feature-item" data-aos="fade-up">
+                <div class="feature-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>EPIC STORYLINE</h3>
+                <p>Experience the timeless tale of Ramayana through immersive gameplay and stunning visuals.</p>
+            </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>MULTIPLE CHARACTERS</h3>
+                <p>Play as different characters from the epic, each with unique abilities and storylines.</p>
+            </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-icon">
+                    <i class="fas fa-map"></i>
+                </div>
+                <h3>VAST OPEN WORLD</h3>
+                <p>Explore ancient India with meticulously crafted environments and hidden treasures.</p>
+            </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>DIVINE POWERS</h3>
+                <p>Unlock and master divine weapons and abilities inspired by ancient Hindu mythology.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About the Game -->
+    <section class="about-section">
+        <h2 class="section-title">ABOUT THE GAME</h2>
+        <div class="about-content">
+            <p>
+                <span class="first-letter">E</span>mbark on an extraordinary journey through ancient India in <strong>RAMAYAN: THE EPIC QUEST</strong>. 
+                This action-adventure game brings to life the timeless epic of the Ramayana, where you'll step into the 
+                shoes of Lord Rama on his divine mission to rescue Sita from the clutches of the demon king Ravana.
+            </p>
+            <p>
+                Navigate through lush forests, treacherous mountains, and mythical realms as you gather allies, 
+                battle fearsome demons, and fulfill your destiny. With breathtaking visuals, immersive gameplay, 
+                and a soundtrack that echoes the grandeur of this ancient tale, <strong>RAMAYAN: THE EPIC QUEST</strong> 
+                offers an unparalleled gaming experience that honors one of humanity's greatest stories.
+            </p>
+            <p>
+                Will you rise to the challenge, uphold dharma, and restore balance to the world? The epic quest awaits.
+            </p>
+        </div>
+    </section>
+
+    <!-- Social Media -->
+    <section class="social-section">
+        <h2 class="section-title">FOLLOW US</h2>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/shumaarstudio/" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@ShumaarStudios" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="studio-logo">
+                <h3>SHUMAAR STUDIOS</h3>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 SHUMAAR STUDIOS. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Full Trailer -->
+    <div id="trailer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-youtube-player"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
