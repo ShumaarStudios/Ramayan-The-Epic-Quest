@@ -316,7 +316,7 @@ function initFireworks() {
 
   // Create 20 fireworks per second for 5 seconds
   let fireworksCreated = 0
-  const totalFireworks = 20 * 5 // 20 per second for 5 seconds
+  const totalFireworks = 100 * 3 // 20 per second for 5 seconds
 
   const fireworkInterval = setInterval(() => {
     for (let i = 0; i < 2; i++) {
